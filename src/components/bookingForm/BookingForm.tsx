@@ -4,20 +4,11 @@ import { DatePickerComponent } from "../datepicker/DatePickerComponent";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { submitAPI, fetchAPI } from "../utils/meta_api";
 import { useNavigate } from "react-router-dom";
+import { userInputs,date } from "../../models/BookingForm";
 
-type userInputs = {
-  email: string;
-  occasion: string;
-  time: string;
-  guest: string;
-};
 
-interface date {
-  startDate: "";
-  endDate: "";
-}
 
-export const BookingForm = () => {
+export const BookingForm= () => {
   const {
     register,
     handleSubmit,
@@ -61,14 +52,14 @@ export const BookingForm = () => {
           >
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="guest" value="Time" />
+                <Label htmlFor="time" value="Time" />
               </div>
 
               <select
                 data-testid="time"
                 {...register("time", { required: true })}
                 defaultValue={""}
-                id="res-time "
+                id="time "
               >
                 <option value="" disabled>
                   {" "}
@@ -93,7 +84,7 @@ export const BookingForm = () => {
               <select
                 data-testid="guest"
                 {...register("guest", { required: true })}
-                id="guests"
+                id="guest"
                 defaultValue={""}
               >
                 <option value="" disabled>
@@ -111,11 +102,12 @@ export const BookingForm = () => {
 
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="" value="Occasions" />
+                <Label htmlFor="occasion" value="Occasions" />
               </div>
 
               <select
                 data-testid="occasion"
+                id="occasion"
                 {...register("occasion", { required: true })}
                 defaultValue={""}
               >
@@ -134,7 +126,7 @@ export const BookingForm = () => {
               <div className="mb-2 block">
                 <Label htmlFor="date" value="Date" />
               </div>
-              <div data-testid="datepicker">
+              <div id="date" data-testid="datepicker">
                 <DatePickerComponent sendDate={recieveData} />
               </div>
               {date == undefined ? (
@@ -145,14 +137,14 @@ export const BookingForm = () => {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="email1" value="Your email" />
+                <Label htmlFor="email" value="Your email" />
               </div>
               <TextInput
                 data-testid="email"
                 {...register("email", {
                   required: "Email Address is required",
                 })}
-                id="email1"
+                id="email"
                 type="email"
                 placeholder="your@email.com"
               />
