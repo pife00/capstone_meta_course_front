@@ -26,7 +26,7 @@ export const Header = () => {
                             font-Markazi
                             text-lg
                             mb-4" >Chicago</h2>
-                            <div className="max-w-xs ">
+                            <div className="max-w-sm sm:max-w-fit ">
                                 <p className="text-white 
                                 text-lg
                                 font-Markazi

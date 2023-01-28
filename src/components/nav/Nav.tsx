@@ -1,13 +1,14 @@
 import { Navbar } from "flowbite-react";
 import logo from '../../assets/icons_assets/Logo .svg'
 import { CenterPage } from "../center/CenterPage";
-
+import { Link } from "react-router-dom";
 export const Nav = () => {
   return (
     <CenterPage>
     <Navbar
       fluid={true} 
       rounded={true}>
+        <Link to="/">
       <Navbar.Brand
      
       >
@@ -18,10 +19,15 @@ export const Nav = () => {
           alt="littel lemon Logo"
         />
       </Navbar.Brand>
+        
+        </Link>
       
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link className="font-Markazi" href="/" active={true}>Home</Navbar.Link>
+        <Link to="/">
+        <Navbar.Link className="font-Markazi"  active={true}>Home</Navbar.Link>
+        
+        </Link>
         <Navbar.Link className="font-Markazi" href="#">About</Navbar.Link>
         <Navbar.Link className="font-Markazi" href="#">Menu</Navbar.Link>
         <Navbar.Link className="font-Markazi" href="#">Reservation</Navbar.Link>

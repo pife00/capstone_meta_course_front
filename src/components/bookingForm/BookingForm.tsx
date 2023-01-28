@@ -1,7 +1,9 @@
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePickerComponent } from "../datepicker/DatePickerComponent";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { submitAPI, fetchAPI } from "../utils/meta_api";
+import { useNavigate } from "react-router-dom";
 
 type userInputs = {
   email: string;
@@ -10,11 +12,10 @@ type userInputs = {
   guest: string;
 };
 
-interface date{
-  startDate:'',
-  endDate:''
+interface date {
+  startDate: "";
+  endDate: "";
 }
-
 
 export const BookingForm = () => {
   const {
@@ -25,19 +26,30 @@ export const BookingForm = () => {
     formState: { errors },
   } = useForm<userInputs>();
 
-  const [date, setDate] = useState<date|undefined>()
+  const [date, setDate] = useState<date | undefined>();
+  const [timesDate, setTimesDate] = useState<string[]>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = fetchAPI(new Date());
+    setTimesDate(data);
+  }, []);
   const onSubmit: SubmitHandler<userInputs> = (data) => {
     const userInfo = {
       ...data,
       ...date,
-    }
-    console.log(userInfo)
-    reset()
+    };
+    submitAPI(userInfo);
+    navigate(
+      `/confirmed-booking/${userInfo.time}/${userInfo.occasion}/${userInfo.guest}/${userInfo.startDate}`,
+      { state: { email: userInfo.email } }
+    );
+    //reset();
   };
 
-  const recieveData = (data:date) =>{
-    setDate(data)
-  }
+  const recieveData = (data: date) => {
+    setDate(data);
+  };
 
   return (
     <>
@@ -53,6 +65,7 @@ export const BookingForm = () => {
               </div>
 
               <select
+                data-testid="time"
                 {...register("time", { required: true })}
                 defaultValue={""}
                 id="res-time "
@@ -61,12 +74,11 @@ export const BookingForm = () => {
                   {" "}
                   choose time{" "}
                 </option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
+                {timesDate?.map((el) => (
+                  <option key={el} value={el}>
+                    {el}
+                  </option>
+                ))}
               </select>
               {errors.time && (
                 <p className="text-red-500">This field is required</p>
@@ -79,6 +91,7 @@ export const BookingForm = () => {
               </div>
 
               <select
+                data-testid="guest"
                 {...register("guest", { required: true })}
                 id="guests"
                 defaultValue={""}
@@ -102,6 +115,7 @@ export const BookingForm = () => {
               </div>
 
               <select
+                data-testid="occasion"
                 {...register("occasion", { required: true })}
                 defaultValue={""}
               >
@@ -120,19 +134,21 @@ export const BookingForm = () => {
               <div className="mb-2 block">
                 <Label htmlFor="date" value="Date" />
               </div>
-
-              <DatePickerComponent sendDate={recieveData} />
-              {date == undefined 
-              ? <p className="text-red-500">This field is required</p>
-              :<p></p>
-              }
-
+              <div data-testid="datepicker">
+                <DatePickerComponent sendDate={recieveData} />
+              </div>
+              {date == undefined ? (
+                <p className="text-red-500">This field is required</p>
+              ) : (
+                <p></p>
+              )}
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="email1" value="Your email" />
               </div>
               <TextInput
+                data-testid="email"
                 {...register("email", {
                   required: "Email Address is required",
                 })}
@@ -141,13 +157,19 @@ export const BookingForm = () => {
                 placeholder="your@email.com"
               />
               {errors.email && (
-                <p className="text-red-500" role="alert">
-                  {errors.email?.message}
+                <p
+                  data-testid="email-error"
+                  className="text-red-500"
+                  role="alert"
+                >
+                  Email Address is required
                 </p>
               )}
             </div>
 
-            <Button type="submit">Submit</Button>
+            <Button data-testid="submit-button" type="submit">
+              Submit
+            </Button>
           </form>
         </Card>
       </div>
