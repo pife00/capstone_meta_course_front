@@ -4,11 +4,9 @@ import { DatePickerComponent } from "../datepicker/DatePickerComponent";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { submitAPI, fetchAPI } from "../utils/meta_api";
 import { useNavigate } from "react-router-dom";
-import { userInputs,date } from "../../models/BookingForm";
+import { userInputs, date } from "../../models/BookingForm";
 
-
-
-export const BookingForm= () => {
+export const BookingForm = () => {
   const {
     register,
     handleSubmit,
@@ -26,6 +24,7 @@ export const BookingForm= () => {
     setTimesDate(data);
   }, []);
   const onSubmit: SubmitHandler<userInputs> = (data) => {
+    console.log("Hello");
     const userInfo = {
       ...data,
       ...date,
@@ -47,6 +46,8 @@ export const BookingForm= () => {
       <div className="px-4">
         <Card>
           <form
+            role="form"
+            aria-label="booking information"
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4 "
           >
@@ -141,6 +142,7 @@ export const BookingForm= () => {
               </div>
               <TextInput
                 data-testid="email"
+               
                 {...register("email", {
                   required: "Email Address is required",
                 })}
@@ -159,7 +161,7 @@ export const BookingForm= () => {
               )}
             </div>
 
-            <Button data-testid="submit-button" type="submit">
+            <Button data-testid="submitButton" type="submit">
               Submit
             </Button>
           </form>

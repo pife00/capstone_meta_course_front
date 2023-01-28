@@ -35,24 +35,25 @@ export const HomeView = () => {
 
     const showDishes = dishes.map((el) => {
         return (
-            <CardFood
-                key={el.title}
-                title={el.title}
-                price={el.price}
-                description={el.description}
-                img={el.img}
-            />
+            <article>
+                <CardFood
+                    key={el.title}
+                    title={el.title}
+                    price={el.price}
+                    description={el.description}
+                    img={el.img}
+                />
+            </article>
         );
     });
 
     return (
         <>
             <Header />
-
             <CenterPage>
                 <div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-48 py-32">
-                        <h1 className="text-center lg:text-start font-extrabold lg:text-4xl md:text-2xl text-xl font-Markazi">
+                        <h1 aria-label="special weeks dishes" className="text-center lg:text-start font-extrabold lg:text-4xl md:text-2xl text-xl font-Markazi">
                             This Weeks Specials!
                         </h1>
                         <div
@@ -61,6 +62,7 @@ export const HomeView = () => {
                         flex justify-center lg:justify-start"
                         >
                             <button
+                            
                                 className="
                                     rounded-2xl
                                     py-2

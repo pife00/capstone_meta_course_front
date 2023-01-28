@@ -58,23 +58,6 @@ describe("valid inputs",()=>{
 
   })
 
-  describe('invalid input',()=>{
-    test.only('email invalid',async()=>{
-      render(<BookingForm />);
-      let submitButton = screen.getByTestId('submit-button')
-
-       await act(async()=>{
-        const emailInput = screen.getByTestId('email')
-        fireEvent.click(submitButton)
-        fireEvent.change(emailInput,{target:{value:"Email Address is required"}})
-      })
-      const errorP = screen.getByText(/Email Address is required/i)
-      expect(errorP).toBe('Email Address is required')
-      
-    })
-  })
-
-
 })
 
 

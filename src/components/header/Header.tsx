@@ -5,6 +5,7 @@ import { CenterPage } from "../center/CenterPage"
 export const Header = () => {
     return (
         <>
+        <header role="banner" >
             <div className="bg-myGreen " >
                 <CenterPage>
                     <div className=" text-center 
@@ -35,6 +36,7 @@ export const Header = () => {
                             <div className="mt-2 flex justify-center lg:justify-start">
                                 <Link to="/reserve-table" >
                                 <button
+                                aria-label="go to booking table button"
                                     className="             
                                     rounded-2xl
                                     py-2
@@ -57,6 +59,8 @@ export const Header = () => {
                     </div>
                 </CenterPage>
             </div>
+
+        </header>
         </>
     )
 }

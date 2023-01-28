@@ -6,11 +6,12 @@ export const Nav = () => {
   return (
     <CenterPage>
     <Navbar
+    role="navigation"
       fluid={true} 
       rounded={true}>
         <Link to="/">
       <Navbar.Brand
-     
+     role="logo"
       >
         
         <img
@@ -23,16 +24,18 @@ export const Nav = () => {
         </Link>
       
       <Navbar.Toggle />
-      <Navbar.Collapse>
+      <Navbar.Collapse
+      role="menubar"
+      >
         <Link to="/">
-        <Navbar.Link className="font-Markazi"  active={true}>Home</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi"  active={true}>Home</Navbar.Link>
         
         </Link>
-        <Navbar.Link className="font-Markazi" href="#">About</Navbar.Link>
-        <Navbar.Link className="font-Markazi" href="#">Menu</Navbar.Link>
-        <Navbar.Link className="font-Markazi" href="#">Reservation</Navbar.Link>
-        <Navbar.Link className="font-Markazi" href="#">Order Online</Navbar.Link>
-        <Navbar.Link className="font-Markazi" href="#">Login</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi" href="#">About</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi" href="#">Menu</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi" href="#">Reservation</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi" href="#">Order Online</Navbar.Link>
+        <Navbar.Link role="menuitem" className="font-Markazi" href="#">Login</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
 

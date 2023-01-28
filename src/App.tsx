@@ -12,9 +12,8 @@ function App() {
 
   return (
     <>
-      <Nav />
-      
-      <main>
+      <Nav /> 
+      <main role="main">
         <Routes>
           <Route path="/" element={<HomeView />} />
           <Route path='/reserve-table' element={<BookingView />} />
